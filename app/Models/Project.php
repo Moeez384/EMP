@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
-    protected $fillable=[
+    protected $fillable = [
         'name',
         'description',
         'workCompleted',
@@ -15,7 +15,17 @@ class Project extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'project_user', 'user_id', 'project_id');
+    }
+
+    public function modules()
+    {
+        return $this->hasMany(Module::class);
+    }
+
+    public function dprs()
+    {
+        return $this->hasMany(Dpr::class);
     }
     use HasFactory;
 }

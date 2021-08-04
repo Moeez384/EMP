@@ -17,7 +17,9 @@
 								<th style="text-align:center;">Name</th>
 								<th style="text-align:center;">Description</th>
 								<th style="text-align:center;">Work Complted</th>
-                                <th style="text-align:center">Edit</th>
+								<th style="text-align:center;">Modules</th>
+								<th style="text-align:center;">Assigned To</th>
+								<th style="text-align:center;">Add Module</th>
                                 <th style="text-align:center">Delete</th>
 							</tr>
 						</thead>
@@ -27,10 +29,32 @@
 								<td style="text-align:center;">{{ $project->id }}</td>
 								<td style="text-align:center;">{{ $project->name }}</td>
 								<td style="text-align:center;">{{ $project->description }}</td>
-                                <td style="text-align:center;">{{ $salary->workCompleted }}</td>
-								<td style="text-align:center;"> <button class="btn btn-primary">Edit</button>
+                                <td style="text-align:center;">{{ $project->workCompleted }}</td>
+								<td style="text-align:center;">
+								@foreach($project->modules as $u)
+
+								{{ $u->name.' ' }}
+								<?php
+								echo "/";
+								?>
+								@endforeach
+							</td>
+								<td style="text-align:center;">
+								@foreach($project->users as $u)
+
+								{{ $u->name.' ' }}
+								<?php
+								echo "/";
+								?>
+								@endforeach
+							</td>
+								<td style="text-align:center;"><a class="btn btn-success" href="{{ route('module.create',$project->id) }}">Add Module</a></td>
+								<form action="{{route( 'project.destroy',$project->id) }}" method="post">
+									@csrf
+									@method('DELETE')
                                 <td style="text-align:center;"> <button class="btn btn-danger">Delete</button>
 								</td>
+								</form>
 								</tr>
                                 @endforeach
 						</tbody>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Module;
 use App\Models\Project_users;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -16,7 +17,12 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects=Project::all();
+        // $users=User::get();
+        // $projects=$users->with('projects')->get();
+        // dd($users->$projects);
+        // dd($users->projects);
+        $projects=Project::with('users')->with('modules')->get();
+        // dd($projects->first()->users);
         return view('projects.index',compact('projects'));
     }
 
@@ -39,7 +45,7 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        
+        //  dd($request->module);
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
@@ -49,15 +55,23 @@ class ProjectController extends Controller
         'description'=>$request->description,
         'workCompleted'=>0,
        ]);
+
+       for($i=0;$i<count($request->module)-1;$i++){
+        Module::create([
+            'project_id'=>$project->id,
+            'name'=>$request->module[$i],
+        ]);
+    }
        
-        for ($i=0;$i<count($request->emp_name)-1;$i++){
-           $user= User::where('name','=',$request->emp_name[$i])->first();
-        //    dd($user);
+        for ($i=0; $i<count($request->emp_name)-1; $i++){
+           $user= User::where('name',$request->emp_name[$i])->first();
+           
            Project_users::create([
-               'user_id'=>$user->id,
                'project_id'=>$project->id,
+               'user_id'=>$user->id,
            ]);
         }
+        return redirect()->route('project.create')->with('success','Project Added Successfully');
     }
 
     /**
@@ -102,6 +116,7 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+        return redirect()->route('project.index')->with('success','Project Deleted Successfully');
     }
 }

@@ -409,6 +409,11 @@
                                  <li><a href="{{ route('project.index') }}">All Project</a></li>
                                  <li><a href="{{ route('project.create') }}">Add Project</a></li>
                              </ul>
+                             <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-home"></i><span class="hide-menu">DPR</span></a>
+                                <ul aria-expanded="false" class="collapse">
+                                 <li><a href="{{ route('dpr.index')  }}">Add DPR</a></li>
+                                 <li><a href="{{ route('dpr.index1')  }}">DPRs</a></li>
+                             </ul>
                             </li>
 
                         
