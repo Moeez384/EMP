@@ -111,7 +111,9 @@
         </div>
 
     </div>
-    <button onclick="window.print()" style=" margin-top:30px; margin-left:1190px;" class="btn btn-primary">Print Slip</button>
+    <div class="d-flex" style="margin-left: 1210px; margin-top:50px;">
+    <a href="{{ route('salary.index') }}"><button  class="btn btn-primary">Back</button></a>
+    <button onclick="window.print()"  class="btn btn-primary">Print Slip</button>
+    </div>
 </body>
-
 </html>

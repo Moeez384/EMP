@@ -43,7 +43,7 @@ class User extends Authenticatable
 
     public function projects()
     {
-        return $this->belongsToMany(Project::class,'project_user','project_id','id');
+        return $this->belongsToMany(Project::class,'project_user','project_id','user_id');
     }
 
 }

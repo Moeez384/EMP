@@ -18,13 +18,7 @@ class DprController extends Controller
      */
     public function index()
     {
-        $projects = Project::whereHas(
-            'users',
-            function ($query) {
-                return $query->where('user_id', '1');
-            }
-        )->with('users')->get();
-        dd($projects);
+        $projects = auth()->user()->projects()->get();
         return view('dpr.index', compact('projects'));
     }
 
@@ -129,7 +123,7 @@ class DprController extends Controller
     public function add($id)
     {
         $project = Project::where('id', $id)->first();
-        $projects = Project::with('modules')->get();
+        $projects = Project::where('id',$id)->with('modules')->get();
         return view('dpr.create', compact('projects', 'project'));
     }
 }

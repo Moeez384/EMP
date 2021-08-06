@@ -19,6 +19,7 @@
 								<th style="text-align:center;">Work Complted</th>
 								<th style="text-align:center;">Modules</th>
 								<th style="text-align:center;">Assigned To</th>
+								<th style="text-align:center;">Project Report</th>
 								<th style="text-align:center;">Add Module</th>
                                 <th style="text-align:center">Delete</th>
 							</tr>
@@ -30,7 +31,7 @@
 								<td style="text-align:center;">{{ $project->name }}</td>
 								<td style="text-align:center;">{{ $project->description }}</td>
                                 <td style="text-align:center;">{{ $project->workCompleted }}</td>
-								<td style="text-align:center;">
+								<td style="text-align:center;" style="max-width:25px; min-width:25px;">
 								@foreach($project->modules as $u)
 
 								{{ $u->name.' ' }}
@@ -48,6 +49,7 @@
 								?>
 								@endforeach
 							</td>
+							<td style="text-align:center;"><a class="btn btn-primary" href="{{ route('project.dprs',$project->id) }}">Project Report</a></td>
 								<td style="text-align:center;"><a class="btn btn-success" href="{{ route('module.create',$project->id) }}">Add Module</a></td>
 								<form action="{{route( 'project.destroy',$project->id) }}" method="post">
 									@csrf

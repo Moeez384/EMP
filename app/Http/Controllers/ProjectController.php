@@ -119,4 +119,10 @@ class ProjectController extends Controller
         $project->delete();
         return redirect()->route('project.index')->with('success','Project Deleted Successfully');
     }
+
+    public function dprs($id){
+        $project=Project::where('id',$id)->first();
+        $modules=Module::where('project_id',$id)->with('dprs')->get();
+        return view('projects.dprs',compact('modules','project'));
+    }
 }

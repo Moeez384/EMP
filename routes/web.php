@@ -41,6 +41,7 @@ Route::get('/leave-status/{sta}/{id}', [LeaveController::class, 'status'])->name
 Route::get('/Attendance-record',[AttendanceController::class,'record'])->name('Attendance.record')->middleware(('auth'));
 Route::get('Attendance-individualRecord/{empid}',[AttendanceController::class,'individualRecord'])->name('Attendance.individualRecord')->middleware('auth');
 Route::resource('/project',ProjectController::class)->middleware('auth');
+Route::get('project-dprs/{id}',[ProjectController::class,'dprs'])->name('project.dprs')->middleware('auth');
 Route::get('module-create/{id}',[ModuleController::class,'create'])->name('module.create')->middleware('auth');
 Route::post('module-store',[ModuleController::class,'store'])->name('module.store')->middleware('auth');
 Route::resource('dpr',DprController::class)->middleware('auth');
